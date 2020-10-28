@@ -1,0 +1,16 @@
+{
+  "basic": {
+    "experiment": "gaze estimation",
+    "folder_id": "0159",
+    "eye": "left",
+    "name": "Anonymous",
+    "email": "anonymous@email.com",
+    "gender": "male",
+    "date": "08/10/2019"
+  },
+  "appearance": {
+    "glass": true,
+    "lenses": false,
+    "makeup": false
+  }
+}

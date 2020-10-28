@@ -1,0 +1,61 @@
+{
+    "folder_id": "0078",
+    "eye": "right",
+    "columns": [
+        "frame_no",
+        "target_no",
+        "time_stamp",
+        "target_x",
+        "target_y",
+        "pupil_x",
+        "pupil_y",
+        "ellipse_min_axis",
+        "ellipse_max_axis",
+        "ellipse_angle",
+        "glint_1_x",
+        "glint_1_y",
+        "glint_2_x",
+        "glint_2_y",
+        "glint_3_x",
+        "glint_3_y",
+        "glint_4_x",
+        "glint_4_y"
+    ],
+    "filenames": [
+    ],
+    "image_data": {
+        "width": 1600,
+        "height": 1200,
+        "channels": 3
+    },
+    "camera_data": {
+        "name": "PointGrey Grasshopper3",
+        "port": "USB3",
+        "model": "GS3-U3-41C6NIR-C",
+        "resolution": "4.1MP",
+        "sensor": "CMOSIS CMV4000-3E12 NIR",
+        "lens_mount": "C-mount",
+        "readout_method": "Global Shutter",
+        "frame_rate": 150
+    },
+    "lenses_data": {
+    	"name": "Navitar Machine Vision",
+        "model": "NMV-35M1",
+        "efl": "35mm",
+        "focal_length": "1.4",
+        "field_angle": "20.9x15.8",
+        "focus": "manual",
+        "format": "1/1",
+        "mount": "C-mount"
+    },
+    "screen_data": {
+    	"name": "AOC E2460PHU",
+        "model": "240LM00010",
+        "size": "24 inch",
+        "resolution": "1920x1080",
+        "refresh_rate": "60Hz",
+        "response_time": "2ms",
+        "screen_area": "531.36x298.89 mm",
+        "viewing_angle": "170/160º"
+    }
+}

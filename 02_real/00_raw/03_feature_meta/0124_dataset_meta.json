@@ -1,0 +1,376 @@
+{
+    "folder_id": "0124",
+    "eye": "right",
+    "columns": [
+        "frame_no",
+        "target_no",
+        "time_stamp",
+        "target_x",
+        "target_y",
+        "pupil_x",
+        "pupil_y",
+        "ellipse_min_axis",
+        "ellipse_max_axis",
+        "ellipse_angle",
+        "glint_1_x",
+        "glint_1_y",
+        "glint_2_x",
+        "glint_2_y",
+        "glint_3_x",
+        "glint_3_y",
+        "glint_4_x",
+        "glint_4_y"
+    ],
+    "filenames": [
+        {
+            "fileName": "00_0100x0100.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 30,
+                "max_area": 59,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "01_0386x0100.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 29,
+                "max_area": 50,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "02_0672x0100.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 29,
+                "max_area": 50,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "03_0958x0100.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 29,
+                "max_area": 50,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "04_1244x0100.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 28,
+                "max_area": 50,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "05_1530x0100.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 28,
+                "max_area": 46,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "06_1816x0100.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 28,
+                "max_area": 46,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "07_0100x0320.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 34,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "08_0386x0320.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 34,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "09_0672x0320.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 34,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "10_0958x0320.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 34,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "11_1244x0320.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 34,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "12_1530x0320.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 34,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "13_1816x0320.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 29,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "14_0100x0540.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 33,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "15_0386x0540.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 33,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "16_0672x0540.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 33,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "17_0958x0540.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 33,
+                "max_area": 49,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "18_1244x0540.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 33,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "19_1530x0540.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 37,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "20_1816x0540.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 37,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "21_0100x0760.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 35,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "22_0386x0760.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 35,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "23_0672x0760.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 35,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "24_0958x0760.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 35,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "25_1244x0760.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 35,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "26_1530x0760.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 35,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "27_1816x0760.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 35,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "28_0100x0980.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 42,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "29_0386x0980.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 42,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "30_0672x0980.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 42,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "31_0958x0980.mov",
+            "image_analysis": {
+                "threshold": 60,
+                "min_area": 42,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "32_1244x0980.mov",
+            "image_analysis": {
+                "threshold": 58,
+                "min_area": 42,
+                "max_area": 60,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "33_1530x0980.mov",
+            "image_analysis": {
+                "threshold": 58,
+                "min_area": 33,
+                "max_area": 61,
+                "gaussian_kernel_size": 9
+            }
+        },
+        {
+            "fileName": "34_1816x0980.mov",
+            "image_analysis": {
+                "threshold": 58,
+                "min_area": 33,
+                "max_area": 61,
+                "gaussian_kernel_size": 9
+            }
+        }
+    ],
+    "image_data": {
+        "width": 1600,
+        "height": 1200,
+        "channels": 3
+    },
+    "camera_data": {
+        "name": "PointGrey Grasshopper3",
+        "port": "USB3",
+        "model": "GS3-U3-41C6NIR-C",
+        "resolution": "4.1MP",
+        "sensor": "CMOSIS CMV4000-3E12 NIR",
+        "lens_mount": "C-mount",
+        "readout_method": "Global Shutter",
+        "frame_rate": 150
+    },
+    "lenses_data": {
+    	"name": "Navitar Machine Vision",
+        "model": "NMV-35M1",
+        "efl": "35mm",
+        "focal_length": "1.4",
+        "field_angle": "20.9x15.8",
+        "focus": "manual",
+        "format": "1/1",
+        "mount": "C-mount"
+    },
+    "screen_data": {
+    	"name": "AOC E2460PHU",
+        "model": "240LM00010",
+        "size": "24 inch",
+        "resolution": "1920x1080",
+        "refresh_rate": "60Hz",
+        "response_time": "2ms",
+        "screen_area": "531.36x298.89 mm",
+        "viewing_angle": "170/160º"
+    }
+}
