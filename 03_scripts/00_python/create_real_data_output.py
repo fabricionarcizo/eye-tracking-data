@@ -43,19 +43,23 @@ for input, output, stat in zip(inputs, outputs, stats):
 
     errors = errors[~np.all(errors[:, 1:4] == 0, axis=1)]
 
+    sts = np.array([[
+        errors[:, 2].mean(),
+        errors[:, 2].std(),
+        errors[:, 3].mean(),
+        errors[:, 3].std(),
+        errors[:, 4].mean(),
+        errors[:, 4].std()
+    ]])
+
+    mean = errors[:, 2:4].mean(axis=0)
+    std = (sts[0, 1] + sts[0, 3]) / 2
+    errors = errors[np.linalg.norm(errors[:, 2:4] - mean, axis=1) < std * 3]
+
     df = pd.DataFrame(errors, columns=["experiment", "eye_id", "error_deg_x", "error_deg_y", "error_deg_xy"])
     df.experiment = df.experiment.astype(int)
     df.eye_id = df.eye_id.astype(int)
     df.to_csv(output, sep=",", index=False)
-
-    sts = np.array([[
-        df["error_deg_x"].values.mean(),
-        df["error_deg_x"].values.std(),
-        df["error_deg_y"].values.mean(),
-        df["error_deg_y"].values.std(),
-        df["error_deg_xy"].values.mean(),
-        df["error_deg_xy"].values.std()
-    ]])
 
     df = pd.DataFrame(sts, columns=["error_deg_x_mean", "error_deg_x_std",
                                     "error_deg_y_mean", "error_deg_y_std",
