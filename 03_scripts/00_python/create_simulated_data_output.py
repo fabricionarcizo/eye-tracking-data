@@ -29,6 +29,7 @@ for input, output, stat in zip(inputs, outputs, stats):
     errors = np.zeros((len(files), 5))
 
     for i, file in enumerate(files):
+        print("%s: %d" % (input, i))
         data = pd.read_csv(file)
         errors[i, 0] = i
         errors[i, 1] = abs(data["error_deg_x"].values).mean()
@@ -51,7 +52,7 @@ for input, output, stat in zip(inputs, outputs, stats):
 
     mean = errors[:, 1:3].mean(axis=0)
     std = (sts[0, 1] + sts[0, 3]) / 2
-    # errors = errors[np.linalg.norm(errors[:, 1:3] - mean, axis=1) < std * 3]
+    errors = errors[np.linalg.norm(errors[:, 1:3] - mean, axis=1) < std * 3]
 
     df = pd.DataFrame(errors, columns=["experiment", "error_deg_x", "error_deg_y", "error_deg_z", "error_deg_xyz"])
     df.experiment = df.experiment.astype(int)
