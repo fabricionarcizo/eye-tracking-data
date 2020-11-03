@@ -51,8 +51,9 @@ for input, output, stat in zip(inputs, outputs, stats):
     ]])
 
     mean = errors[:, 1:3].mean(axis=0)
-    std = (sts[0, 1] + sts[0, 3]) / 2
-    errors = errors[np.linalg.norm(errors[:, 1:3] - mean, axis=1) < std * 3]
+    std = np.array([sts[0, 1], sts[0, 3]])
+    errors = errors[abs(errors[:, 1] - mean[0]) < std[0] * 3]
+    errors = errors[abs(errors[:, 2] - mean[1]) < std[1] * 3]
 
     df = pd.DataFrame(errors, columns=["experiment", "error_deg_x", "error_deg_y", "error_deg_z", "error_deg_xyz"])
     df.experiment = df.experiment.astype(int)

@@ -24,6 +24,7 @@ __version__ = "$Revision: 2019112201 $"
 #                               Imported Headers                               #
 # ---------------------------------------------------------------------------- #
 import glob
+from matplotlib.patches import Ellipse
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -35,8 +36,11 @@ from scipy import stats
 # ---------------------------------------------------------------------------- #
 
 # Search for a set of files that matches a specified pattern.
+# filenames = glob.glob("../../01_simulated/03_final_results/*.csv")
 filenames = glob.glob("../../02_real/03_final_results/*.csv")
 filenames.sort()
+stats = filenames[1::2]
+filenames = filenames[::2]
 
 # Titles.
 titles = ["Polynomial (Original)", "Polynomial (Camera)", "Polynomial (Distortion)",
@@ -46,7 +50,7 @@ titles = ["Polynomial (Original)", "Polynomial (Camera)", "Polynomial (Distortio
 fig = plt.figure()
 
 # Process individually each file.
-for i, filename in enumerate(filenames):
+for i, stat, filename in zip(range(len(stats)), stats, filenames):
 
     # Define a new subplot.
     ax = fig.add_subplot(2, 3, i + 1)
@@ -70,6 +74,9 @@ for i, filename in enumerate(filenames):
         # Slice the eye tracking data based on the session ID.
         session = data.loc[data["experiment"] == j]
 
+        # Get the result column name.
+        column = "error_deg_xyz" if filenames[0].find("simulated") > -1 else "error_deg_xy"
+
         # I have excluded some sessions due to head movements and problems in
         # the eye feature extraction.
         if len(session) != 0:
@@ -78,21 +85,24 @@ for i, filename in enumerate(filenames):
             # gaze estimations.
             symbol = "/" if j % 2 == 0 else "."
             gaze[symbol].append(session[["error_deg_x", "error_deg_y"]].values[0])
-            error_deg[symbol].append(session["error_deg_xy"].values[0])
+            error_deg[symbol].append(session[column].values[0])
 
     # Convert vectors to numpy arrays.
     for symbol in ["/", "."]:
         gaze[symbol] = np.asarray(gaze[symbol])
         error_deg[symbol] = np.asarray(error_deg[symbol])
 
+    # Read the current CSV file.
+    data = pd.read_csv(stat, sep=",")
+
     # Calculate the mean and standard deviation of the current eye tracking
     # method.
     mean = np.vstack((gaze["/"], gaze["."])).mean(axis=0)
-    std = np.hstack((error_deg["/"], error_deg["."])).std()
+    std = data[["error_deg_x_std", "error_deg_y_std"]].values[0]
 
     # Calculate the plot limits.
-    min_x, min_y = mean - std * 4
-    max_x, max_y = mean + std * 4
+    min_x, min_y = [mean[0] - std[0] * 4, mean[1] - std[1] * 4]
+    max_x, max_y = [mean[0] + std[0] * 4, mean[1] + std[1] * 4]
     ax.set_xlim(min_x, max_x)
     ax.set_ylim(min_y, max_y)    
 
@@ -103,7 +113,7 @@ for i, filename in enumerate(filenames):
 
     # Calculate and draw the standard deviation.
     for j in range(1, 4):
-        circle = plt.Circle(mean, std * j, color="k", fill=False)
+        circle = Ellipse(mean, 2 * std[0] * j, 2 * std[1] * j, color="k", fill=False)
         ax.add_artist(circle)
 
     # Plot the gaze error.
@@ -114,7 +124,6 @@ for i, filename in enumerate(filenames):
 
     # Plot information.
     ax.set_title(titles[i])
-    ax.set_aspect("equal")
     if i == 0 or i == 3:
         ax.set_ylabel("Vertical Gaze Error (deg)")
     if i == 2:
