@@ -26,36 +26,41 @@ for input, output, stat in zip(inputs, outputs, stats):
     files = glob.glob(input)
     files.sort()
 
-    errors = np.zeros((len(files), 5))
+    errors = np.zeros((len(files), 8))
 
     for i, file in enumerate(files):
         print("%s: %d" % (input, i))
         data = pd.read_csv(file)
         errors[i, 0] = i
-        errors[i, 1] = abs(data["error_deg_x"].values).mean()
-        errors[i, 2] = abs(data["error_deg_y"].values).mean()
-        errors[i, 3] = abs(data["error_deg_z"].values).mean()
-        errors[i, 4] = data["error_deg_xyz"].values.mean()
+        errors[i, 1] = int(file.split("/")[-1].split("_")[1][1:])
+        errors[i, 2] = int(file.split("/")[-1].split("_")[2][1:])
+        errors[i, 3] = int(file.split("/")[-1].split("_")[3][1:])
+
+        errors[i, 4] = abs(data["error_deg_x"].values).mean()
+        errors[i, 5] = abs(data["error_deg_y"].values).mean()
+        errors[i, 6] = abs(data["error_deg_z"].values).mean()
+        errors[i, 7] = data["error_deg_xyz"].values.mean()
 
     errors = errors[~np.all(errors[:, 1:4] == 0, axis=1)]
 
     sts = np.array([[
-        errors[:, 1].mean(),
-        errors[:, 1].std(),
-        errors[:, 2].mean(),
-        errors[:, 2].std(),
-        errors[:, 3].mean(),
-        errors[:, 3].std(),
         errors[:, 4].mean(),
-        errors[:, 4].std()
+        errors[:, 4].std(),
+        errors[:, 5].mean(),
+        errors[:, 5].std(),
+        errors[:, 6].mean(),
+        errors[:, 6].std(),
+        errors[:, 7].mean(),
+        errors[:, 7].std()
     ]])
 
-    mean = errors[:, 1:3].mean(axis=0)
+    mean = errors[:, 4:6].mean(axis=0)
     std = np.array([sts[0, 1], sts[0, 3]])
-    errors = errors[abs(errors[:, 1] - mean[0]) < std[0] * 3]
-    errors = errors[abs(errors[:, 2] - mean[1]) < std[1] * 3]
+    errors = errors[abs(errors[:, 4] - mean[0]) < std[0] * 3]
+    errors = errors[abs(errors[:, 5] - mean[1]) < std[1] * 3]
 
-    df = pd.DataFrame(errors, columns=["experiment", "error_deg_x", "error_deg_y", "error_deg_z", "error_deg_xyz"])
+    df = pd.DataFrame(errors, columns=[ "experiment", "camera_pos_x", "camera_pos_y", "camera_pos_z",
+                                        "error_deg_x", "error_deg_y", "error_deg_z", "error_deg_xyz" ])
     df.experiment = df.experiment.astype(int)
     df.to_csv(output, sep=",", index=False)
 
