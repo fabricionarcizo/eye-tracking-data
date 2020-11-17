@@ -61,16 +61,18 @@ for i, path in enumerate(files):
     print(i, bins)
     result = model.fit(unityHist, params, x=bins[1:])
     xPlot = np.linspace(bins.min() * 1.10, bins.max() * 1.10, 1000)
-    comps = result.eval_components(x=xPlot)
+    # comps = result.eval_components(x=xPlot) // Evaluate the individual Gaussian component
 
     # Plot the histogram.
-    plt.bar(bins[1:], unityHist, width=widths, edgecolor="k", alpha=0.5, color="k",
+    plt.bar(bins[1:], unityHist, width=widths, edgecolor="k", alpha=0.35, color="k",
             yerr=error, error_kw=dict(lw=1, capsize=2, capthick=1))
-    # plt.axvline(xPlot.mean(), color="k", alpha=0.5, linestyle='dashed', linewidth=1)
+    plt.plot(xPlot, result.eval(x=xPlot), "k-", alpha=0.5, lw=2)
+    # plt.axvline(xPlot.mean(), color="k", alpha=0.5, linestyle='dashed', linewidth=1) # Plot the histogram mean
 
-    plt.plot(xPlot, comps["g1_"], "k-", alpha=0.5, lw=2)
-    if len(peaks) > 1:
-        plt.plot(xPlot, comps["g2_"], "k-", alpha=0.5, lw=2)
+    # Plot the Gaussian components.
+    # plt.plot(xPlot, comps["g1_"], "k--", alpha=0.25, lw=2)
+    # if len(peaks) > 1:
+    #     plt.plot(xPlot, comps["g2_"], "k--", alpha=0.25, lw=2)
 
     # Plot information.
     plt.title(titles[i])
