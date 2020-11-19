@@ -39,11 +39,11 @@ for i, path in enumerate(files):
     errorY = np.asarray(errorY).reshape(-1)
 
     # Calculate the X-axis histogram error.
-    hist, bins = np.histogram(errorX, bins=21)
+    hist, bins = np.histogram(errorX, bins=21, density=True)
     print(i, hist)
 
     # Histogram normalization.
-    error = np.sqrt(hist) / hist.sum()
+    error = np.sqrt(hist) / hist.sum() * (hist.mean() / 2)
     hist = hist / hist.sum()
     widths = bins[:-1] - bins[1:]
 
@@ -62,7 +62,7 @@ for i, path in enumerate(files):
 
     # Fit the Gaussian curve.
     result = model.fit(hist, params, x=bins[1:])
-    xPlot = np.linspace(bins.min() * 1.10, bins.max() * 1.10, 1000)
+    xPlot = np.linspace(bins.min(), bins.max(), 1000)
     # comps = result.eval_components(x=xPlot) // Evaluate the individual Gaussian component
 
     # Plot the histogram.
@@ -82,5 +82,6 @@ for i, path in enumerate(files):
         plt.ylabel("Normalized Density")
     if i > 2:
         plt.xlabel("Horizontal Gaze Error (metros)")
+    plt.ylim([0, 0.29])
 
 plt.show()
