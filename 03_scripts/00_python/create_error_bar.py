@@ -3,8 +3,16 @@ import glob
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from itertools import tee
 from scipy import signal
 from lmfit.models import GaussianModel
+
+# Define pair of bins.
+def pairwise(iterable):
+    "s -> (s0, s1), (s1, s2), (s2, s3), ..."
+    left, right = tee(iterable)
+    next(right, None)
+    return zip(left, right)
 
 # Exponential and Gaussian model.
 gauss1Model = GaussianModel(prefix="g1_")
@@ -38,12 +46,27 @@ for i, path in enumerate(files):
     errorX = np.asarray(errorX).reshape(-1)
     errorY = np.asarray(errorY).reshape(-1)
 
-    # Calculate the X-axis histogram error.
-    hist, bins = np.histogram(errorX, bins=21, density=True)
+    # Calculate the X-axis histogram.
+    hist, bins = np.histogram(errorX, bins=21)
     print(i, hist)
 
+    # Calculate the histogram error.
+    errors = []
+    for left, right in pairwise(bins):
+        if np.any((errorX >= left) & (errorX < right)):
+            indices = np.where((errorX >= left) & (errorX < right))
+            mean = errorX[indices].mean()
+            std = errorX[indices].std()
+
+            inside = np.where((errorX >= mean - std) & (errorX <= mean + std))
+            error = len(errorX[inside]) / 2
+        else:
+            error = 0
+        errors.append(error)
+    errors = np.asarray(errors)
+
     # Histogram normalization.
-    error = np.sqrt(hist) / hist.sum() * (hist.mean() / 2)
+    errors = errors / hist.sum()
     hist = hist / hist.sum()
     widths = bins[:-1] - bins[1:]
 
@@ -67,7 +90,7 @@ for i, path in enumerate(files):
 
     # Plot the histogram.
     plt.bar(bins[1:], hist, width=widths, edgecolor="k", alpha=0.35, color="k",
-            yerr=error, error_kw=dict(lw=1, capsize=2, capthick=1))
+            yerr=errors, error_kw=dict(lw=1, capsize=2, capthick=1))
     plt.plot(xPlot, result.eval(x=xPlot), "k-", alpha=0.5, lw=2)
     # plt.axvline(errorX.mean(), color="k", alpha=0.5, linestyle='dashed', linewidth=1) # Plot the histogram mean
 
@@ -82,6 +105,6 @@ for i, path in enumerate(files):
         plt.ylabel("Normalized Density")
     if i > 2:
         plt.xlabel("Horizontal Gaze Error (metros)")
-    plt.ylim([0, 0.29])
+    plt.ylim([0, 0.325])
 
 plt.show()
