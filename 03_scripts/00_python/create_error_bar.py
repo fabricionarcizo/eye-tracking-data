@@ -104,7 +104,7 @@ for i, path in enumerate(files):
     if i == 0 or i == 3:
         plt.ylabel("Normalized Density")
     if i > 2:
-        plt.xlabel("Horizontal Gaze Error (metros)")
+        plt.xlabel("Horizontal Gaze Error (deg)")
     plt.ylim([0, 0.325])
 
 plt.show()
