@@ -26,6 +26,20 @@ files = [ "../../01_simulated/02_data_analysis/00_interpolate/00_original/*.csv"
           "../../01_simulated/02_data_analysis/01_homography/01_camera/*.csv",
           "../../01_simulated/02_data_analysis/01_homography/02_distortion/*.csv" ]
 
+outputs = [ "../../01_simulated/03_final_results/00_simulation_00_interpolate_00_original.csv",
+            "../../01_simulated/03_final_results/00_simulation_00_interpolate_01_camera.csv",
+            "../../01_simulated/03_final_results/00_simulation_00_interpolate_02_distortion.csv",
+            "../../01_simulated/03_final_results/00_simulation_01_homography_00_original.csv",
+            "../../01_simulated/03_final_results/00_simulation_01_homography_01_camera.csv",
+            "../../01_simulated/03_final_results/00_simulation_01_homography_02_distortion.csv" ]
+
+stats = [ "../../01_simulated/03_final_results/00_simulation_00_interpolate_00_original_sts.csv",
+          "../../01_simulated/03_final_results/00_simulation_00_interpolate_01_camera_sts.csv",
+          "../../01_simulated/03_final_results/00_simulation_00_interpolate_02_distortion_sts.csv",
+          "../../01_simulated/03_final_results/00_simulation_01_homography_00_original_sts.csv",
+          "../../01_simulated/03_final_results/00_simulation_01_homography_01_camera_sts.csv",
+          "../../01_simulated/03_final_results/00_simulation_01_homography_02_distortion_sts.csv" ]
+
 titles = [ "Polynomial (Original)", "Polynomial (Camera)", "Polynomial (Distortion)",
            "Homography (Original)", "Homography (Camera)", "Homography (Distortion)" ]
 
@@ -85,7 +99,7 @@ for i, path in enumerate(files):
 
     # Fit the Gaussian curve.
     result = model.fit(hist, params, x=bins[1:])
-    xPlot = np.linspace(bins.min(), bins.max(), 1000)
+    xPlot = np.linspace(bins[1:].min() * 1.10, bins[1:].max() * 1.10, 1000)
     # comps = result.eval_components(x=xPlot) // Evaluate the individual Gaussian component
 
     # Plot the histogram.
@@ -106,5 +120,14 @@ for i, path in enumerate(files):
     if i > 2:
         plt.xlabel("Horizontal Gaze Error (deg)")
     plt.ylim([0, 0.325])
+
+    # Saving the CSV data.
+    output = np.vstack((bins[1:], hist, errors)).T
+    df = pd.DataFrame(output, columns=[ "bins", "hist", "errors" ])
+    df.to_csv(outputs[i], sep=",", index=False)
+
+    output = np.vstack((xPlot, result.eval(x=xPlot))).T
+    df = pd.DataFrame(output, columns=[ "x", "y" ])
+    df.to_csv(stats[i], sep=",", index=False)
 
 plt.show()
